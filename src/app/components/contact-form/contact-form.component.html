@@ -1,0 +1,254 @@
+<div>
+  <div class="card highlight-card my-4">
+    <h2>Contacto de soporte !</h2>
+  </div>
+
+  <!-- Formulario -->
+  <form class="row g-3 p-4 fw-bold" [formGroup]="contactForm">
+    <div class="col-12">
+      <label for="NombreCompleto" class="form-label">Nombre completo</label>
+      <input
+        type="text"
+        name="nombreCompleto"
+        class="form-control"
+        id="nombreCompleto"
+        formControlName="nombreCompleto"
+        [(ngModel)]="nombreCompleto"
+      />
+    </div>
+    <!-- Error -->
+    <div
+      class="content-errors"
+      *ngIf="
+        nombreCompletoControl.invalid &&
+        (nombreCompletoControl.touched || nombreCompletoControl.dirty)
+      "
+    >
+      <p
+        class="mensaje-error mb-0"
+        *ngIf="nombreCompletoControl.hasError('required')"
+      >
+        El campo es obligatorio
+      </p>
+    </div>
+
+    <div class="col-12">
+      <label for="NombreEmpresa" class="form-label">Nombre de la empresa</label>
+      <input
+        type="text"
+        name="nombreEmpresa"
+        class="form-control"
+        id="nombreEmpresa"
+        formControlName="nombreEmpresa"
+      />
+    </div>
+    <!-- Error -->
+    <div
+      class="content-errors"
+      *ngIf="
+        nombreEmpresaControl.invalid &&
+        (nombreEmpresaControl.touched || nombreEmpresaControl.dirty)
+      "
+    >
+      <p
+        class="mensaje-error mb-0"
+        *ngIf="nombreEmpresaControl.hasError('required')"
+      >
+        El campo es obligatorio
+      </p>
+    </div>
+
+    <div class="col-12">
+      <label for="inputEmail" class="form-label">Correo electrónico</label>
+      <input
+        type="email"
+        name="email"
+        class="form-control"
+        id="email"
+        formControlName="email"
+      />
+    </div>
+    <!-- Error -->
+    <div
+      class="content-errors"
+      *ngIf="
+        emailControl.invalid && (emailControl.touched || emailControl.dirty)
+      "
+    >
+      <p class="mensaje-error mb-0" *ngIf="emailControl.hasError('required')">
+        El campo es obligatorio
+      </p>
+      <p class="mensaje-error mb-0" *ngIf="emailControl.hasError('email')">
+        El campo debe ser un correo válido
+      </p>
+    </div>
+
+    <div class="col-md-6">
+      <label for="telefono" class="form-label">Teléfono</label>
+      <input
+        type="text"
+        name="telefono"
+        class="form-control"
+        id="telefono"
+        formControlName="telefono"
+      />
+      <!-- Error -->
+      <div
+        class="col-md-6 content-errors mt-3"
+        *ngIf="
+          telefonoControl.invalid &&
+          (telefonoControl.touched || telefonoControl.dirty)
+        "
+      >
+        <p
+          class="mensaje-error mb-0"
+          *ngIf="telefonoControl.hasError('required')"
+        >
+          El campo es obligatorio
+        </p>
+        <p
+          class="mensaje-error mb-0"
+          *ngIf="telefonoControl.hasError('minlength')"
+        >
+          El campo debe tener al menos 10 caracteres
+        </p>
+        <p
+          class="mensaje-error mb-0"
+          *ngIf="telefonoControl.hasError('pattern')"
+        >
+          El campo debe contener solo números
+        </p>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <label for="" class="form-label">Categoría</label>
+      <select
+        name="categoria"
+        id="categoria"
+        class="form-select"
+        formControlName="categoria"
+      >
+        <option value="facturacion">Facturacion</option>
+        <option value="soportetecnico">Soporte técnico</option>
+        <option value="ventas">Ventas</option>
+        <option value="informaciongeneral">Información general</option>
+      </select>
+      <!-- Error -->
+      <div
+        class="col-md-6 content-errors mt-3"
+        *ngIf="
+          categoriaControl.invalid &&
+          (categoriaControl.touched || categoriaControl.dirty)
+        "
+      >
+        <p
+          class="mensaje-error mb-0"
+          *ngIf="categoriaControl.hasError('required')"
+        >
+          El campo es obligatorio
+        </p>
+      </div>
+    </div>
+
+    <div class="mb-2">
+      <label for="exampleFormControlTextarea1" class="form-label"
+        >Mensaje</label
+      >
+      <textarea
+        class="form-control"
+        name="mensaje"
+        id="mensaje"
+        rows="3"
+        placeholder="Escriba su mensaje"
+        formControlName="mensaje"
+      ></textarea>
+    </div>
+    <!-- Error -->
+    <div
+      class="content-errors mb-1"
+      *ngIf="
+        mensajeControl.invalid &&
+        (mensajeControl.touched || mensajeControl.dirty)
+      "
+    >
+      <p class="mensaje-error mb-0" *ngIf="mensajeControl.hasError('required')">
+        El campo es obligatorio
+      </p>
+      <p
+        class="mensaje-error mb-0"
+        *ngIf="mensajeControl.hasError('minlength')"
+      >
+        El campo debe tener al menos 10 caracteres
+      </p>
+      <p
+        class="mensaje-error mb-0"
+        *ngIf="mensajeControl.hasError('maxlength')"
+      >
+        El campo debe tener al maximo 218 caracteres
+      </p>
+    </div>
+
+    <div class="col-12">
+      <button
+        type="submit"
+        class="btn btn-enviar btn-lg text-white fw-bold"
+        (click)="sendContact(contactForm)"
+        [disabled]="contactForm.invalid"
+      >
+        <img class="me-1" width="25" alt="icon" src="../assets/send.svg" />
+        Enviar
+      </button>
+    </div>
+  </form>
+
+  <p
+    class="rounded-2 text-center btn-enviar fs-5 fw-light font-monospace"
+    *ngIf="registrado"
+  >
+    Usuario {{ nombreCompleto }},{{ " " }}{{ mensaje }}
+  </p>
+
+  <!-- tablas de usuarios registrados -->
+  <div class="my-5">
+    <h3 class="text-center">Tablas de usuarios</h3>
+
+    <table class="table table-hover mb-2">
+      <thead>
+        <tr>
+          <th scope="col">Nombre Completo</th>
+          <th scope="col">Nombre Empresa</th>
+          <th scope="col">Email</th>
+          <th scope="col">Teléfono</th>
+          <th scope="col">Categoría</th>
+          <th scope="col">Mensaje</th>
+          <th scope="col">Acción</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let contact of contactService.contacts">
+          <td>{{ contact.nombreCompleto }}</td>
+          <td>{{ contact.nombreEmpresa }}</td>
+          <td>{{ contact.email }}</td>
+          <td>{{ contact.telefono }}</td>
+          <td>{{ contact.categoria }}</td>
+          <td>{{ contact.mensaje }}</td>
+          <td>
+            <button
+              class="btn btn-danger btn-sm"
+              (click)="deleteContact(contact._id)"
+            >
+              <img
+                class=""
+                width="20"
+                alt="icon"
+                src="../../assets/delete.svg"
+              />
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

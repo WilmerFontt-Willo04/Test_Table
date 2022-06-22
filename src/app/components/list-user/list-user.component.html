@@ -1,0 +1,13 @@
+<h2>Listado-Usuarios!</h2>
+<ag-grid-angular
+  style="width: 1220px; height: 250px"
+  class="ag-theme-alpine mb-5"
+  [rowData]="rowData"
+  [columnDefs]="columnDefs"
+  [defaultColDef]="defaultColDef"
+  [animateRows]="true"
+  (cellClicked)="onCellClicked($event)"
+  (cellValueChanged)="onCellValueChanged($event)"
+>
+</ag-grid-angular>
+<!-- (gridReady)="onGridReady($event)" -->

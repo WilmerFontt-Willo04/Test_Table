@@ -1,0 +1,71 @@
+.card {
+  all: unset;
+  border-radius: 4px;
+  border: 1px solid #eee;
+  background-color: #fafafa;
+  height: 40px;
+  width: auto;
+  margin: 0 8px 16px;
+  padding: 16px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s ease-in-out;
+  line-height: 24px;
+}
+
+.card.highlight-card {
+  background-color: #20b2aa;
+  color: white;
+  font-weight: 600;
+  border: none;
+  width: 100%;
+}
+
+a,
+a:visited,
+a:hover {
+  color: #1976d2;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #125699;
+}
+
+footer {
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  line-height: 20px;
+}
+
+footer a {
+  display: flex;
+  align-items: center;
+}
+
+.btn-enviar {
+  background-color: #20b2aa;
+  /* color: white; */
+}
+
+.ng-touched.ng-invalid:is(input, textarea, select),
+.ng-dirty.ng-invalid:is(input, textarea) {
+  outline: 2px solid #ec0f0f;
+}
+
+.content-errors {
+  background-color: rgba(236, 15, 15, 0.3);
+  border-radius: 5px;
+  padding: 5px;
+  margin-left: 8px;
+  width: 95%;
+}
+
+.mensaje-error {
+  color: #ec0f0f;
+  margin-left: 8px;
+  font-style: italic;
+}
